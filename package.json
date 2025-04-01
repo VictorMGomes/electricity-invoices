@@ -1,10 +1,10 @@
 {
   "name": "electricity-invoices",
   "version": "0.0.1",
-  "description": "",
-  "author": "",
+  "description": "An application to extract, organize, and present data from electricity bills.",
+  "author": "Victor M. Gomes",
   "private": true,
-  "license": "UNLICENSED",
+  "license": "MIT",
   "scripts": {
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
