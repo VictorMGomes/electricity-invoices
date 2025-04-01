@@ -1,0 +1,3 @@
+[submodule "slim-containers"]
+	path = slim-containers
+	url = https://github.com/VictorMGomes/slim-containers.git
