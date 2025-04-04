@@ -2,10 +2,16 @@
   "name": "electricity-invoices",
   "version": "0.0.1",
   "description": "An application to extract, organize, and present data from electricity bills.",
-  "author": "Victor M. Gomes",
+  "author": {
+    "name": "Victor M. Gomes",
+    "email": "info@victormgomes.net",
+    "url": "https://victormgomes.net"
+  },
   "private": true,
   "license": "MIT",
   "scripts": {
+    "App:Start:Dev": "npm run lint && npm run format && npm run start:dev && npm run Load:Appinfo",
+    "Load:Appinfo": "cross-env APP_VERSION=$(node -p \"require('./package.json').version\") APP_NAME=$(node -p \"require('./package.json').name\")",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
@@ -18,21 +24,25 @@
     "test:cov": "jest --coverage",
     "test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand",
     "test:e2e": "jest --config ./test/jest-e2e.json",
-    "prisma:generate": "prisma generate --schema=src/schemas/schema.prisma",
-    "prisma:migrate": "prisma migrate dev --schema=src/schemas/schema.prisma",
-    "prisma:migrate:deploy": "prisma migrate deploy --schema=src/schemas/schema.prisma",
-    "prisma:studio": "prisma studio --schema=src/schemas/schema.prisma",
-    "prisma:push": "prisma db push --schema=src/schemas/schema.prisma"
+    "prisma:generate": "prisma generate --schema=src/shared/database/db.schema.prisma",
+    "prisma:migrate": "prisma migrate dev --schema=src/shared/database/db.schema.prisma",
+    "prisma:migrate:deploy": "prisma migrate deploy --schema=src/shared/database/db.schema.prisma",
+    "prisma:studio": "prisma studio --schema=src/shared/database/db.schema.prisma",
+    "prisma:push": "prisma db push --schema=src/shared/database/db.schema.prisma"
   },
   "dependencies": {
     "@nestjs/common": "^11.0.1",
     "@nestjs/core": "^11.0.1",
     "@nestjs/platform-express": "^11.0.1",
+    "@nestjs/swagger": "^11.1.0",
     "@prisma/client": "^6.5.0",
+    "nestjs-zod": "^4.3.1",
     "pdf-parse": "^1.1.1",
     "pg": "^8.14.1",
     "reflect-metadata": "^0.2.2",
-    "rxjs": "^7.8.1"
+    "rxjs": "^7.8.1",
+    "swagger-ui-express": "^5.0.1",
+    "zod": "^3.24.2"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.2.0",
