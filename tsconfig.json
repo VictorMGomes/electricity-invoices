@@ -11,9 +11,7 @@
     "outDir": "./dist",
     "baseUrl": "./",
     "paths": {
-      "@src/*": [
-        "src/*"
-      ]
+      "@src/*": ["src/*"]
     },
     "incremental": true,
     "skipLibCheck": true,
@@ -22,14 +20,14 @@
     "noImplicitAny": true,
     "strictBindCallApply": true,
     "noFallthroughCasesInSwitch": true,
-    "types": [
-      "node",
-      "jest"
-    ],
+    "types": ["node", "jest"]
   },
-  "files": [],
-  "references": [
-    { "path": "./tsconfig.app.json" },
-    { "path": "./tsconfig.node.json" }
+  "exclude": [
+    "src/resources",
+    "vite.config.ts",
+    "vite-env.d.ts",
+    "tsconfig.node.json",
+    "tsconfig.frontend.json",
+    "tsconfig.app.json"
   ]
 }

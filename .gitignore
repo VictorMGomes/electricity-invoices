@@ -69,3 +69,8 @@ report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
 
 #dev migrations
 src/shared/database/migrations
+
+#package-lock.json
+package-lock.json
+
+public

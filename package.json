@@ -10,8 +10,7 @@
   "private": true,
   "license": "MIT",
   "scripts": {
-    "App:Start:Dev": "npm run lint && npm run format && npm run start:dev && npm run Load:Appinfo",
-    "Load:Appinfo": "cross-env APP_VERSION=$(node -p \"require('./package.json').version\") APP_NAME=$(node -p \"require('./package.json').name\")",
+    "Backend:Start:Dev": "npm run lint && npm run format && npm run start:dev",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
@@ -30,7 +29,7 @@
     "prisma:studio": "prisma studio --schema=src/shared/database/db.schema.prisma",
     "prisma:push": "prisma db push --schema=src/shared/database/db.schema.prisma",
     "dev": "vite",
-    "vite:build": "tsc -b && vite build",
+    "vite:build": "tsc --project tsconfig.frontend.json && vite build",
     "preview": "vite preview"
   },
   "dependencies": {
