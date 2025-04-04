@@ -26,5 +26,10 @@
       "node",
       "jest"
     ],
-  }
+  },
+  "files": [],
+  "references": [
+    { "path": "./tsconfig.app.json" },
+    { "path": "./tsconfig.node.json" }
+  ]
 }

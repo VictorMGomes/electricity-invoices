@@ -1,19 +1,24 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# OS
+.DS_Store
+
 # compiled output
 /dist
 /node_modules
 /build
 
-# Logs
-logs
-*.log
-npm-debug.log*
-pnpm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-lerna-debug.log*
+dist
 
-# OS
-.DS_Store
+dist-ssr
+*.local
 
 # Tests
 /coverage
@@ -54,3 +59,13 @@ pids
 
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
+
+# Additional IDE files
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+#dev migrations
+src/shared/database/migrations

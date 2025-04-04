@@ -29,19 +29,19 @@ export class UsersController {
 
   @Post()
   @apiDocGenerator()
-  create(@Body() createUserDto: CreateUserDto) {
+  createOne(@Body() createUserDto: CreateUserDto) {
     return this.usersService.create(createUserDto);
   }
 
   @Put(':id')
   @apiDocGenerator()
-  update(@Param('id') id: number, @Body() data: UpdateUserDto) {
+  updateOne(@Param('id') id: number, @Body() data: UpdateUserDto) {
     return this.usersService.update(id, data);
   }
 
   @Delete(':id')
   @apiDocGenerator()
-  delete(@Param('id') id: number) {
+  deleteOne(@Param('id') id: number) {
     return this.usersService.delete(id);
   }
 }
