@@ -3,7 +3,7 @@ import { Injectable } from '@nestjs/common';
 import * as packageJson from 'package.json';
 
 @Injectable()
-export class ConfigurationService {
+export class SystemService {
   getAppName(): string {
     return packageJson.name;
   }

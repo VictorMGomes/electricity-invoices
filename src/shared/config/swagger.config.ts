@@ -11,12 +11,12 @@ import {
 } from '@nestjs/swagger';
 import { INestApplication, applyDecorators } from '@nestjs/common';
 import { patchNestJsSwagger } from 'nestjs-zod';
-import { ConfigurationService } from '@src/shared/services/system/system.service'; // Importando o service
+import { SystemService } from '@src/shared/services/system/system.service'; // Importando o service
 
 export function apiDocSetup(app: INestApplication) {
   patchNestJsSwagger();
 
-  const configService = app.get(ConfigurationService);
+  const configService = app.get(SystemService);
 
   const config = new DocumentBuilder()
     .setTitle(configService.getAppName())
