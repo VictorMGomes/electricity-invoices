@@ -1,41 +1,68 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { useTranslation } from 'react-i18next';
 import Dropdown from 'react-bootstrap/Dropdown';
 
+type Theme = 'light' | 'dark' | 'system';
+
 function ThemeSelector() {
   const { t } = useTranslation();
-  const [theme, setTheme] = useState<'light' | 'dark'>('light');
+  const [theme, setTheme] = useState<Theme>('system');
 
-  useEffect(() => {
-    const storedTheme = localStorage.getItem('theme') as
-      | 'light'
-      | 'dark'
-      | null;
-    const prefersDark = window.matchMedia(
-      '(prefers-color-scheme: dark)',
-    ).matches;
-    const initialTheme = storedTheme || (prefersDark ? 'dark' : 'light');
-    setTheme(initialTheme);
-    document.documentElement.setAttribute('data-bs-theme', initialTheme);
+  const getSystemTheme = () =>
+    window.matchMedia('(prefers-color-scheme: dark)').matches
+      ? 'dark'
+      : 'light';
+
+  const applyTheme = useCallback((selectedTheme: Theme) => {
+    const themeToApply =
+      selectedTheme === 'system' ? getSystemTheme() : selectedTheme;
+    document.documentElement.setAttribute('data-bs-theme', themeToApply);
   }, []);
 
   useEffect(() => {
-    document.documentElement.setAttribute('data-bs-theme', theme);
+    const storedTheme = (localStorage.getItem('theme') as Theme) || 'system';
+    setTheme(storedTheme);
+    applyTheme(storedTheme);
+
+    const media = window.matchMedia('(prefers-color-scheme: dark)');
+    const handler = () => {
+      if (storedTheme === 'system') applyTheme('system');
+    };
+    media.addEventListener('change', handler);
+    return () => media.removeEventListener('change', handler);
+  }, [applyTheme]);
+
+  useEffect(() => {
+    applyTheme(theme);
     localStorage.setItem('theme', theme);
-  }, [theme]);
+  }, [theme, applyTheme]);
 
   const handleSelect = (selectedKey: string | null) => {
-    if (selectedKey === 'light' || selectedKey === 'dark') {
+    if (
+      selectedKey === 'light' ||
+      selectedKey === 'dark' ||
+      selectedKey === 'system'
+    ) {
       setTheme(selectedKey);
+    }
+  };
+
+  const getThemeLabel = () => {
+    switch (theme) {
+      case 'light':
+        return '🌞 ' + t('navbar.light-mode');
+      case 'dark':
+        return '🌙 ' + t('navbar.dark-mode');
+      case 'system':
+      default:
+        return '🖥️ ' + t('navbar.system');
     }
   };
 
   return (
     <Dropdown onSelect={handleSelect}>
       <Dropdown.Toggle variant="outline-secondary" size="sm">
-        {theme === 'light'
-          ? '🌞 ' + t('navbar.light-mode')
-          : '🌙 ' + t('navbar.dark-mode')}
+        {getThemeLabel()}
       </Dropdown.Toggle>
 
       <Dropdown.Menu>
@@ -44,6 +71,9 @@ function ThemeSelector() {
         </Dropdown.Item>
         <Dropdown.Item eventKey="dark" active={theme === 'dark'}>
           🌙 {t('navbar.dark-mode')}
+        </Dropdown.Item>
+        <Dropdown.Item eventKey="system" active={theme === 'system'}>
+          🖥️ {t('navbar.system')}
         </Dropdown.Item>
       </Dropdown.Menu>
     </Dropdown>
