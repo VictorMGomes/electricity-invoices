@@ -33,6 +33,15 @@ i18n
     interpolation: {
       escapeValue: false,
     },
+    detection: {
+      order: ['localStorage', 'navigator'],
+
+      lookupLocalStorage: 'i18nextLng',
+
+      caches: ['localStorage'],
+
+      excludeCacheFor: ['cimode'],
+    },
   });
 
 export default i18n;
