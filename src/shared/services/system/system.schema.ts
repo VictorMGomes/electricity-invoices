@@ -5,6 +5,11 @@ export const IdRequired = z.object({
 });
 export type IdRequiredType = z.infer<typeof IdRequired>;
 
+export const UuidRequired = z.object({
+  id: z.string().uuid(),
+});
+export type UuidRequiredType = z.infer<typeof UuidRequired>;
+
 export const DateSchema = z.object({
   createdAt: z.date(),
   updatedAt: z.date(),
