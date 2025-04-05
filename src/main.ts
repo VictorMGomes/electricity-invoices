@@ -5,13 +5,23 @@ import { apiDocSetup } from './shared/config/swagger.config';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
-  app.setGlobalPrefix(process.env.API_PREFIX ?? 'api');
+  const host = process.env.APP_HOST ?? '0.0.0.0';
+  const port = process.env.APP_PORT ?? 3000;
+  const prefix = process.env.API_PREFIX ?? 'api';
+
+  app.setGlobalPrefix(prefix);
 
   apiDocSetup(app);
 
-  await app.listen(
-    process.env.APP_PORT ?? 3000,
-    process.env.APP_HOST ?? '0.0.0.0',
+  await app.listen(port, host);
+  console.log(`Running on: http://${host}:${port}/${prefix}`);
+  console.log(
+    `API documentation available at: http://${host}:${port}/${prefix}/docs`,
+  );
+  console.log(
+    `API json available at: http://${host}:${port}/${prefix}/docs/json`,
   );
 }
-bootstrap();
+bootstrap().catch((err) => {
+  console.error('Application failed to start', err);
+});
