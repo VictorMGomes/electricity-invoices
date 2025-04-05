@@ -8,7 +8,7 @@ import {
   Put,
 } from '@nestjs/common';
 import { UsersService } from '@src/modules/users/users.service';
-import { CreateUserDto, UpdateUserDto } from './user.dto';
+import { CreateUserDto, UpdateUserDto } from './users.dto';
 import { apiDocGenerator } from '@src/shared/config/swagger.config';
 
 @Controller('users')
