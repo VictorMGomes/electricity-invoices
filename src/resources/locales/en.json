@@ -1,0 +1,23 @@
+{
+  "meta": {
+    "home": {
+      "title": "Home | MySite",
+      "description": "Welcome to our homepage."
+    },
+    "about": {
+      "title": "About Us | MySite",
+      "description": "Learn more about us."
+    }
+  },
+  "language": {
+    "pt": "Português",
+    "en": "English"
+  },
+  "navbar": {
+    "title": "Eletricity Invoices",
+    "home": "Home",
+    "about": "About",
+    "dark-mode": "Dark Mode",
+    "light-mode": "Light Mode"
+  }
+}

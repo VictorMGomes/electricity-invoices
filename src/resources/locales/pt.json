@@ -1,0 +1,23 @@
+{
+  "meta": {
+    "home": {
+      "title": "Início | MeuSite",
+      "description": "Bem-vindo à nossa página inicial."
+    },
+    "about": {
+      "title": "Sobre Nós | MeuSite",
+      "description": "Saiba mais sobre nós."
+    }
+  },
+  "language": {
+    "pt": "Português",
+    "en": "English"
+  },
+  "navbar": {
+    "title": "Faturas de Eletricidade",
+    "home": "Início",
+    "about": "Sobre",
+    "dark-mode": "Modo Escuro",
+    "light-mode": "Modo Claro"
+  }
+}
