@@ -1,4 +1,3 @@
-// src/config/configuration.service.ts
 import { Injectable } from '@nestjs/common';
 import * as packageJson from 'package.json';
 

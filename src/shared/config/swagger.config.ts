@@ -11,7 +11,7 @@ import {
 } from '@nestjs/swagger';
 import { INestApplication, applyDecorators } from '@nestjs/common';
 import { patchNestJsSwagger } from 'nestjs-zod';
-import { SystemService } from '@src/shared/services/system/system.service'; // Importando o service
+import { SystemService } from '@src/shared/services/system/system.service';
 
 export function apiDocSetup(app: INestApplication) {
   patchNestJsSwagger();

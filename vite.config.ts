@@ -1,13 +1,12 @@
-// vite.config.ts
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
 
 export default defineConfig({
-  root: path.resolve(__dirname, 'src/resources'), // This is your frontend root
+  root: path.resolve(__dirname, 'src/resources'),
   plugins: [react()],
   build: {
-    outDir: path.resolve(__dirname, 'public'), // Output only for frontend
+    outDir: path.resolve(__dirname, 'public'),
     emptyOutDir: true,
     rollupOptions: {
       input: path.resolve(__dirname, 'src/resources/index.html'),
@@ -21,7 +20,7 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, 'src/resources'), // optional alias for frontend code
+      '@': path.resolve(__dirname, 'src/resources'),
     },
   },
 });
