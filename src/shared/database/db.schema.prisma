@@ -8,22 +8,26 @@ datasource db {
 }
 
 model User {
-  id    Int    @id @default(autoincrement())
-  name  String
-  email String @unique
+  id    Int    @id @default(autoincrement()) @map("id")
+  name  String @map("name")
+  email String @unique @map("email")
+
+  @@map("users")
 }
 
 model EnergyBill {
   id               String   @id @default(uuid())
-  clientNumber     String
-  referenceMonth   String
-  electricityQty   Float
-  electricityValue Float
-  sceeQty          Float
-  sceeValue        Float
-  compensatedQty   Float
-  compensatedValue Float
-  publicLighting   Float
-  createdAt        DateTime @default(now())
-  updatedAt        DateTime @updatedAt
+  clientNumber     String   @map("client_number")
+  referenceMonth   String   @map("reference_month")
+  electricityQty   Float    @map("electricity_qty")
+  electricityValue Float    @map("electricity_value")
+  sceeQty          Float    @map("scee_qty")
+  sceeValue        Float    @map("scee_value")
+  compensatedQty   Float    @map("compensated_qty")
+  compensatedValue Float    @map("compensated_value")
+  publicLighting   Float    @map("public_lighting")
+  createdAt        DateTime @default(now()) @map("created_at")
+  updatedAt        DateTime @updatedAt @map("updated_at")
+
+  @@map("energy_bills")
 }
