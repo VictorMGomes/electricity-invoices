@@ -1,21 +1,24 @@
 import { z } from 'zod';
 
-export const IdRequired = z.object({
+export const idSchema = z.object({
   id: z.number().int().positive(),
 });
-export type IdRequiredType = z.infer<typeof IdRequired>;
+export type idSchemaType = z.infer<typeof idSchema>;
 
-export const UuidRequired = z.object({
+export const uuidSchema = z.object({
   id: z.string().uuid(),
 });
-export type UuidRequiredType = z.infer<typeof UuidRequired>;
+export type uuidSchemaType = z.infer<typeof uuidSchema>;
 
-export const DateSchema = z.object({
-  createdAt: z.date(),
-  updatedAt: z.date(),
-  deletedAt: z.date().nullable(),
+export const dateSchema = z.object({
+  createdAt: z.coerce.date(),
+  updatedAt: z.coerce.date(),
+  deletedAt: z.coerce.date().nullable(),
 });
-export type DateType = z.infer<typeof DateSchema>;
+export type dateSchemaType = z.infer<typeof dateSchema>;
 
-export const SystemSchema = IdRequired.merge(DateSchema);
-export type SystemType = z.infer<typeof SystemSchema>;
+export const idEntitySchema = idSchema.merge(dateSchema);
+export type idEntitySchemaType = z.infer<typeof idEntitySchema>;
+
+export const uuidEntitySchema = uuidSchema.merge(dateSchema);
+export type uuidEntitySchemaType = z.infer<typeof uuidEntitySchema>;
