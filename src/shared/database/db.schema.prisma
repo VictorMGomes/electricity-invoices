@@ -15,19 +15,71 @@ model User {
   @@map("users")
 }
 
-model EnergyBill {
-  id               String   @id @default(uuid())
-  clientNumber     String   @map("client_number")
-  referenceMonth   String   @map("reference_month")
-  electricityQty   Float    @map("electricity_qty")
-  electricityValue Float    @map("electricity_value")
-  sceeQty          Float    @map("scee_qty")
-  sceeValue        Float    @map("scee_value")
-  compensatedQty   Float    @map("compensated_qty")
-  compensatedValue Float    @map("compensated_value")
-  publicLighting   Float    @map("public_lighting")
-  createdAt        DateTime @default(now()) @map("created_at")
-  updatedAt        DateTime @updatedAt @map("updated_at")
+model Client {
+  id            String         @id @default(uuid())
+  clientNumber  String         @unique @map("client_number")
+  name          String         @map("name")
+  installations Installation[]
+  createdAt     DateTime       @default(now()) @map("created_at")
+  updatedAt     DateTime       @updatedAt @map("updated_at")
 
-  @@map("energy_bills")
+  @@map("clients")
+}
+
+model Installation {
+  id                 String               @id @default(uuid())
+  installationNumber String               @unique @map("installation_number")
+  clientId           String               @map("client_id")
+  client             Client               @relation(fields: [clientId], references: [id])
+  invoices           Invoice[]
+  ConsumptionHistory ConsumptionHistory[]
+  createdAt          DateTime             @default(now()) @map("created_at")
+  updatedAt          DateTime             @updatedAt @map("updated_at")
+
+  @@map("installations")
+}
+
+model Invoice {
+  id             String       @id @default(uuid())
+  installationId String       @map("installation_id")
+  installation   Installation @relation(fields: [installationId], references: [id])
+
+  referenceMonth String   @map("reference_month")
+  dueDate        DateTime @map("due_date")
+  emissionDate   DateTime @map("emission_date")
+
+  electricEnergy_kWh   Float @map("electric_energy_kwh")
+  electricEnergy_value Float @map("electric_energy_value")
+
+  sceeEnergy_kWh   Float @map("scee_energy_kwh")
+  sceeEnergy_value Float @map("scee_energy_value")
+
+  compensatedEnergy_kWh   Float @map("compensated_energy_kwh")
+  compensatedEnergy_value Float @map("compensated_energy_value")
+
+  publicLightingContribution Float @map("public_lighting_contribution")
+  totalAmount                Float @map("total_amount")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@unique([referenceMonth, installationId], name: "referenceMonth_installationId")
+  @@map("invoices")
+}
+
+model ConsumptionHistory {
+  id             String       @id @default(uuid())
+  installationId String       @map("installation_id")
+  installation   Installation @relation(fields: [installationId], references: [id])
+
+  monthYear        String @map("month_year")
+  consumption_kWh  Int    @map("consumption_kwh")
+  dailyAverage_kWh Float  @map("daily_average_kwh")
+  days             Int    @map("days")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@unique([installationId, monthYear], name: "installationId_monthYear")
+  @@map("consumption_histories")
 }
