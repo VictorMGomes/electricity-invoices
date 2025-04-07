@@ -13,7 +13,6 @@ This project is built using the following technologies:
 ## Prerequisites
 
 - **Docker**: Ensure Docker is installed and running on your system.
-- **Node.js**: Version `22.14 LTS` is required.
 
 ## Setup Instructions
 
@@ -24,22 +23,26 @@ This project is built using the following technologies:
   ```
 
 2. **Copy Environment Files**  
+  > App envirioment
   ```bash
   cp env.example .env
+  ```
+
+  > Docker envirioment
+  ```bash
   cp slim-containers/.env.example slim-containers/.env
   ```
 
-3. **Set Up Environments**  
-  > ⚠️ **Warning**: The configuration may vary depending on your host operating system:
-  
-  Configure the `.env` file with the necessary environment variables. 
+  > ⚠️ **Warning**: The configuration may vary depending on your host operating system. Configure the `.env` file with the necessary environment variables. 
 
-  > - **Windows**: Use a text editor like Notepad or VS Code to edit the `.env` file. Ensure paths and environment variables are compatible with Windows.
-  > - **Linux/macOS**: Use a terminal-based editor like `vim` or `nano`, or a GUI editor, to modify the `.env` file. Ensure file permissions and paths are correctly set for your system.
-
-4. **Start PostgreSQL**  
+3. **Start PostgreSQL and Node.js**  
   ```bash
-  docker-compose -f slim-containers/docker-compose.yml up -d postgresql
+  docker-compose -f slim-containers/docker-compose.yml up -d postgresql nodejs
+  ```
+
+4. **Enter the Node.js Container**  
+  ```bash
+  docker exec -it development_nodejs sh
   ```
 
 5. **Install Dependencies**  
@@ -47,39 +50,33 @@ This project is built using the following technologies:
   npm install
   ```
 
-## Available Commands
+## Run App in development mode
 
-### Backend Commands
-- **Start Development Server**  
-  ```bash
-  npm run Backend:Start:Dev
-  ```
+### Start Backend Commands
 
-- **Generate Database Schema**  
+1. **Generate Database Schema**  
   ```bash
   npm run Backend:DB:Generate
   ```
-
-- **Run Database Migrations**  
+2. **Run Database Migrations**  
   ```bash
   npm run Backend:DB:Migrate
   ```
+3. **Start Development Server**  
+  ```bash
+  npm run Backend:Start:Dev
+  ```
+### Start Frontend Commands
 
-### Frontend Commands
-- **Start Development Server**  
+1. **Start Development Server**  
   ```bash
   npm run Frontend:Start:Dev
   ```
 
-- **Build Frontend**  
-  ```bash
-  npm run Frontend:Build
-  ```
+  ### Additional Commands
 
-- **Start Preview Server**  
-  ```bash
-  npm run Frontend:Start:Preview
-  ```
+  For more available commands, refer to the `scripts` section in the `package.json` file. Below are some commonly used commands:
+
   ## API Documentation
 
   During development, you can access the API documentation at the following endpoints:
