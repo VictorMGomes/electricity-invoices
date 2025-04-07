@@ -11,6 +11,7 @@ interface FileProcessingStatus {
   success: boolean;
   data?: Bill;
   error?: string;
+  sent?: boolean;
 }
 
 function FileUpload() {
@@ -46,16 +47,22 @@ function FileUpload() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    for (const file of filesStatus) {
+    const updatedStatuses = [...filesStatus];
+
+    for (let i = 0; i < updatedStatuses.length; i++) {
+      const file = updatedStatuses[i];
       if (file.success && file.data) {
         try {
-          const response = await httpPost('billing', file.data);
-          console.log(`✅ ${file.name}: enviado com sucesso`, response);
+          await httpPost('billing', file.data);
+          updatedStatuses[i] = { ...file, sent: true };
         } catch (error) {
-          console.error(`❌ ${file.name}: erro no envio`, error);
+          console.error('Error sending data:', error);
+          updatedStatuses[i] = { ...file, sent: false };
         }
       }
     }
+
+    setFilesStatus(updatedStatuses);
   };
 
   return (
@@ -87,15 +94,23 @@ function FileUpload() {
         </Button>
       </Form>
 
-      {/* Lista de status */}
       {filesStatus.map((file, index) => (
         <Card key={index} className="mt-3">
           <Card.Header>
             {file.name}{' '}
             {file.success ? (
-              <Badge bg="success">Sucesso</Badge>
+              <>
+                <Badge bg="success" className="me-2">
+                  {t('general.success-maped')}
+                </Badge>
+                {file.sent !== undefined && (
+                  <Badge bg={file.sent ? 'primary' : 'danger'}>
+                    {file.sent ? t('general.upload-success') : 'Erro no envio'}
+                  </Badge>
+                )}
+              </>
             ) : (
-              <Badge bg="danger">Erro</Badge>
+              <Badge bg="danger">{t('general.error-maped')}</Badge>
             )}
           </Card.Header>
           <Card.Body className="overflow-auto" style={{ maxHeight: '300px' }}>
