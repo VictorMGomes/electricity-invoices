@@ -1,40 +1,60 @@
-import { Container, Nav, Navbar, Modal, Button } from 'react-bootstrap';
+import { Container, Nav, Navbar, Modal, Button, Form } from 'react-bootstrap';
 import { useTranslation } from 'react-i18next';
 import ThemeSelector from './ThemeSelector';
 import React, { useState } from 'react';
 import LanguageSelector from './LanguageSelector';
 import { FaGear } from 'react-icons/fa6';
+import { Link } from 'react-router-dom';
+import { getAvailablePages } from '../constants/availablePages';
 
 function AppBar() {
   const { t } = useTranslation();
   const [showModal, setShowModal] = useState(false);
 
+  const availablePages = getAvailablePages(t);
+
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container>
-        <Navbar.Brand href="/">{t('navbar.title')}</Navbar.Brand>
+        <Navbar.Brand as={Link} to="/dashboard">
+          {t('navbar.title')}
+        </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="/"> {t('navbar.home')} </Nav.Link>
-            <Nav.Link href="/about">{t('navbar.about')} </Nav.Link>
+            {availablePages.map((page, idx) => (
+              <Nav.Link key={idx} as={Link} to={page.path}>
+                {page.name}
+              </Nav.Link>
+            ))}
           </Nav>
           <Button
-            className="ms-auto"
+            className="ms-auto d-flex align-items-center gap-2"
             onClick={() => setShowModal(true)}
           >
-            <FaGear /> {t('navbar.settings')}
+            <FaGear />
+            {t('navbar.settings')}
           </Button>
         </Navbar.Collapse>
-        <Modal show={showModal} onHide={() => setShowModal(false)}>
-          <Modal.Header closeButton>
-            <Modal.Title>{t('navbar.settings')}</Modal.Title>
+
+        <Modal show={showModal} onHide={() => setShowModal(false)} centered>
+          <Modal.Header closeButton className="justify-content-center">
+            <Modal.Title className="w-100 text-center">
+              {t('navbar.settings')}
+            </Modal.Title>
           </Modal.Header>
-          <Modal.Body>
-            <ThemeSelector />
-            <LanguageSelector />
+          <Modal.Body className="d-flex flex-column align-items-center gap-4">
+            <Form.Group className="w-100 text-center">
+              <Form.Label>{t('navbar.theme')}</Form.Label>
+              <ThemeSelector />
+            </Form.Group>
+
+            <Form.Group className="w-100 text-center">
+              <Form.Label>{t('navbar.language')}</Form.Label>
+              <LanguageSelector />
+            </Form.Group>
           </Modal.Body>
-          <Modal.Footer>
+          <Modal.Footer className="d-flex justify-content-center">
             <Button variant="secondary" onClick={() => setShowModal(false)}>
               {t('navbar.close')}
             </Button>
