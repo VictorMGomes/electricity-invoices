@@ -46,6 +46,8 @@
     "upload-success": "File uploaded successfully.",
     "select-file": "Select a file",
     "submit": "Submit",
-    "credit-message": "This project was made by"
+    "credit-message": "This project was made by",
+    "success-maped": "File mapped successfully.",
+    "error-maped": "Error mapping file."
   }
 }
