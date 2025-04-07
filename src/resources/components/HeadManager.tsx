@@ -13,7 +13,7 @@ export function HeadManager() {
     const titleKey = `meta.${key}.title`;
     const descriptionKey = `meta.${key}.description`;
 
-    const title = t(titleKey);
+    const title = t(titleKey) + " | Eletricity Invoices";
     const description = t(descriptionKey);
 
     if (title && title !== titleKey) {
