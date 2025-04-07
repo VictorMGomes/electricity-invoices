@@ -14,7 +14,7 @@
     "Backend:Build": "npm run lint && npm run format && npm run build",
     "Backend:DB:Generate": "npm run prisma:generate",
     "Backend:DB:Migrate": "npm run prisma:migrate",
-    "Frontend:Start:Dev": "npm run Frontend:lint && npm run dev",
+    "Frontend:Start:Dev": "npm run dev",
     "Frontend:Build": "npm run Frontend:lint && npm run vite:build",
     "Frontend:Start:Preview": "npm run preview",
     "build": "nest build",
