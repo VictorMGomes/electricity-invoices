@@ -1,41 +1,12 @@
-import React, { useEffect, useState, useCallback } from 'react';
+import React from 'react';
 import { useTranslation } from 'react-i18next';
 import Dropdown from 'react-bootstrap/Dropdown';
-
-type Theme = 'light' | 'dark' | 'system';
+import { useTheme } from '../hooks/useTheme';
+import { FaSun, FaMoon, FaDesktop } from 'react-icons/fa6';
 
 function ThemeSelector() {
   const { t } = useTranslation();
-  const [theme, setTheme] = useState<Theme>('system');
-
-  const getSystemTheme = () =>
-    window.matchMedia('(prefers-color-scheme: dark)').matches
-      ? 'dark'
-      : 'light';
-
-  const applyTheme = useCallback((selectedTheme: Theme) => {
-    const themeToApply =
-      selectedTheme === 'system' ? getSystemTheme() : selectedTheme;
-    document.documentElement.setAttribute('data-bs-theme', themeToApply);
-  }, []);
-
-  useEffect(() => {
-    const storedTheme = (localStorage.getItem('theme') as Theme) || 'system';
-    setTheme(storedTheme);
-    applyTheme(storedTheme);
-
-    const media = window.matchMedia('(prefers-color-scheme: dark)');
-    const handler = () => {
-      if (storedTheme === 'system') applyTheme('system');
-    };
-    media.addEventListener('change', handler);
-    return () => media.removeEventListener('change', handler);
-  }, [applyTheme]);
-
-  useEffect(() => {
-    applyTheme(theme);
-    localStorage.setItem('theme', theme);
-  }, [theme, applyTheme]);
+  const { theme, setTheme } = useTheme();
 
   const handleSelect = (selectedKey: string | null) => {
     if (
@@ -50,30 +21,66 @@ function ThemeSelector() {
   const getThemeLabel = () => {
     switch (theme) {
       case 'light':
-        return '🌞 ' + t('navbar.light-mode');
+        return (
+          <>
+            <FaSun className="me-2" />
+            {t('navbar.light-mode')}
+          </>
+        );
       case 'dark':
-        return '🌙 ' + t('navbar.dark-mode');
+        return (
+          <>
+            <FaMoon className="me-2" />
+            {t('navbar.dark-mode')}
+          </>
+        );
       case 'system':
       default:
-        return '🖥️ ' + t('navbar.system');
+        return (
+          <>
+            <FaDesktop className="me-2" />
+            {t('navbar.system')}
+          </>
+        );
     }
   };
 
   return (
     <Dropdown onSelect={handleSelect}>
-      <Dropdown.Toggle variant="outline-secondary" size="sm">
+      <Dropdown.Toggle
+        variant="outline-secondary"
+        size="sm"
+        className="min-width-dropdown text-start"
+      >
         {getThemeLabel()}
       </Dropdown.Toggle>
 
-      <Dropdown.Menu>
-        <Dropdown.Item eventKey="light" active={theme === 'light'}>
-          🌞 {t('navbar.light-mode')}
+      <Dropdown.Menu className="w-100 text-center">
+        <Dropdown.Item
+          eventKey="light"
+          active={theme === 'light'}
+          className="d-flex justify-content-center align-items-center"
+        >
+          <FaSun className="me-2" />
+          {t('navbar.light-mode')}
         </Dropdown.Item>
-        <Dropdown.Item eventKey="dark" active={theme === 'dark'}>
-          🌙 {t('navbar.dark-mode')}
+
+        <Dropdown.Item
+          eventKey="dark"
+          active={theme === 'dark'}
+          className="d-flex justify-content-center align-items-center"
+        >
+          <FaMoon className="me-2" />
+          {t('navbar.dark-mode')}
         </Dropdown.Item>
-        <Dropdown.Item eventKey="system" active={theme === 'system'}>
-          🖥️ {t('navbar.system')}
+
+        <Dropdown.Item
+          eventKey="system"
+          active={theme === 'system'}
+          className="d-flex justify-content-center align-items-center"
+        >
+          <FaDesktop className="me-2" />
+          {t('navbar.system')}
         </Dropdown.Item>
       </Dropdown.Menu>
     </Dropdown>
