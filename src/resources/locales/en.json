@@ -1,12 +1,24 @@
 {
   "meta": {
     "home": {
-      "title": "Home | MySite",
+      "title": "Home",
       "description": "Welcome to our homepage."
     },
     "about": {
-      "title": "About Us | MySite",
+      "title": "About Us",
       "description": "Learn more about us."
+    },
+    "bills": {
+      "title": "Bills",
+      "description": "View your bills."
+    },
+    "clients": {
+      "title": "Clients",
+      "description": "Manage your clients."
+    },
+    "upload": {
+      "title": "Uploads",
+      "description": "Manage your clients."
     }
   },
   "language": {
@@ -17,10 +29,22 @@
     "title": "Eletricity Invoices",
     "home": "Home",
     "about": "About",
+    "bills": "Bills",
+    "clients": "Clients",
     "settings": "Settings",
     "close": "Close",
     "dark-mode": "Dark Mode",
     "light-mode": "Light Mode",
-    "system": "System"
+    "system": "System",
+    "theme": "Theme",
+    "language": "Language",
+    "upload": "Upload files"
+  },
+  "general": {
+    "upload-message": "Upload PDF File",
+    "upload-success": "File uploaded successfully.",
+    "select-file": "Select a file",
+    "submit": "Submit",
+    "credit-message": "This project was made by"
   }
 }

@@ -1,13 +1,25 @@
 {
   "meta": {
     "home": {
-      "title": "Início | MeuSite",
+      "title": "Início",
       "description": "Bem-vindo à nossa página inicial."
     },
     "about": {
-      "title": "Sobre Nós | MeuSite",
+      "title": "Sobre Nós",
       "description": "Saiba mais sobre nós."
-    }
+    },
+    "bills": {
+      "title": "Faturas",
+      "description": "Veja suas faturas."
+    },
+    "clients": {
+      "title": "Clientes",
+      "description": "Gerencie seus clientes."
+    },
+    "upload": {
+      "title": "Uploads",
+      "description": "Gerencie seus clientes."
+    }    
   },
   "language": {
     "pt": "Português",
@@ -17,10 +29,22 @@
     "title": "Faturas de Eletricidade",
     "home": "Início",
     "about": "Sobre",
+    "bills": "Faturas",
+    "clients": "Clientes",
     "settings": "Configurações",
     "close": "Fechar",
     "dark-mode": "Modo Escuro",
     "light-mode": "Modo Claro",
-    "system": "Sistema"
+    "system": "Sistema",
+    "theme": "Tema",
+    "language": "Idioma",
+    "upload": "Carregar arquivos"
+  },
+  "general": {
+  "upload-message": "Enviar Arquivo PDF",
+  "upload-success": "Arquivo enviado com sucesso.",
+  "select-file": "Selecionar um arquivo",
+  "submit": "Enviar",
+  "credit-message": "Este projeto foi feito por"
   }
 }
