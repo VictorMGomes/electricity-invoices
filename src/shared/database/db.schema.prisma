@@ -44,7 +44,7 @@ model Invoice {
   installationId String       @map("installation_id")
   installation   Installation @relation(fields: [installationId], references: [id])
 
-  referenceMonth String   @map("reference_month")
+  referenceMonth DateTime @map("reference_month")
   dueDate        DateTime @map("due_date")
   emissionDate   DateTime @map("emission_date")
 
@@ -72,10 +72,10 @@ model ConsumptionHistory {
   installationId String       @map("installation_id")
   installation   Installation @relation(fields: [installationId], references: [id])
 
-  monthYear        String @map("month_year")
-  consumption_kWh  Int    @map("consumption_kwh")
-  dailyAverage_kWh Float  @map("daily_average_kwh")
-  days             Int    @map("days")
+  monthYear        DateTime @map("month_year")
+  consumption_kWh  Int      @map("consumption_kwh")
+  dailyAverage_kWh Float    @map("daily_average_kwh")
+  days             Int      @map("days")
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
