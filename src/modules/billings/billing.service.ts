@@ -1,4 +1,3 @@
-// src/billing/billing.service.ts
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '@src/shared/services/prisma/prisma.service';
 import { CreateBillDto } from './billing.schema';
@@ -13,7 +12,7 @@ import {
 export class BillingService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async createBill(data: CreateBillDto) {
+  async createOne(data: CreateBillDto) {
     const { client, installation, invoice, consumptionHistories = [] } = data;
 
     const existingClient: Client = await this.prisma.client.upsert({
@@ -94,5 +93,9 @@ export class BillingService {
       invoiceId: existingInvoice.id,
       consumptionHistoryCount: createdHistories.length,
     };
+  }
+
+  async findAll() {
+    return this.prisma.invoice.findMany();
   }
 }

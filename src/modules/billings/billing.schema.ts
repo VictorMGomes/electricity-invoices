@@ -1,4 +1,3 @@
-// src/billing/schemas/create-bill.schema.ts
 import { z } from 'zod';
 import { createZodDto } from 'nestjs-zod';
 
@@ -22,9 +21,11 @@ export const BillSchema = z.object({
 
 export const createBillSchema = z.object({
   client: createClientSchema,
-  installation: createInstallationSchema,
-  invoice: createInvoiceSchema,
-  consumptionHistories: z.array(createConsumptionHistorySchema).optional(),
+  installation: createInstallationSchema.omit({ clientId: true }),
+  invoice: createInvoiceSchema.omit({ installationId: true }),
+  consumptionHistories: z
+    .array(createConsumptionHistorySchema.omit({ installationId: true }))
+    .optional(),
 });
 
 export type CreateBillType = z.infer<typeof createBillSchema>;
