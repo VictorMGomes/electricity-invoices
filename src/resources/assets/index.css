@@ -1,7 +1,11 @@
 .navbar,
+.card,
 .modal {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  box-shadow: 0 2px 4px 0 rgba(31, 38, 135, 0.37);
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  box-shadow:
+    0 0 4px rgba(31, 38, 135, 0.15),
+    0 0 8px rgba(31, 38, 135, 0.1),
+    0 0 10px rgba(31, 38, 135, 0.05);
 }
