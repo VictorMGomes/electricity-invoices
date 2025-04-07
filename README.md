@@ -18,11 +18,15 @@ This project is built using the following technologies:
 
 1. **Clone the Repository**  
   ```bash
-  git clone https://github.com/VictorMGomes/electricity-invoices.git
+  git clone --recurse-submodules https://github.com/VictorMGomes/electricity-invoices.git
+  ```
+
+2. **Go to the project folder**
+  ```bash
   cd electricity-invoices
   ```
 
-2. **Copy Environment Files**  
+4. **Copy Environment Files**  
   > App envirioment
   ```bash
   cp env.example .env
@@ -35,17 +39,17 @@ This project is built using the following technologies:
 
   > ⚠️ **Warning**: The configuration may vary depending on your host operating system. Configure the `.env` file with the necessary environment variables. 
 
-3. **Start PostgreSQL and Node.js**  
+5. **Start PostgreSQL and Node.js**  
   ```bash
   docker-compose -f slim-containers/docker-compose.yml up -d postgresql nodejs
   ```
 
-4. **Enter the Node.js Container**  
+6. **Enter the Node.js Container**  
   ```bash
   docker exec -it development_nodejs sh
   ```
 
-5. **Install Dependencies**  
+7. **Install Dependencies**  
   ```bash
   npm install
   ```
