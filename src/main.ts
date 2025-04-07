@@ -9,6 +9,8 @@ async function bootstrap() {
   const port = process.env.APP_PORT ?? 3000;
   const prefix = process.env.API_PREFIX ?? 'api';
 
+  app.enableCors();
+
   app.setGlobalPrefix(prefix);
 
   apiDocSetup(app);
