@@ -66,6 +66,10 @@ This project is built using the following technologies:
   ```bash
   npm run Backend:DB:Migrate
   ```
+  > A migration name is going to be requested.
+  Since this project uses schema for migrations generations, this project do not track development migrations. 
+  You can type: default
+
 3. **Start Development Server**  
   ```bash
   npm run Backend:Start:Dev
@@ -79,7 +83,7 @@ This project is built using the following technologies:
 
   ### Additional Commands
 
-  For more available commands, refer to the `scripts` section in the `package.json` file. Below are some commonly used commands:
+  For more available commands, refer to the `scripts` section in the `package.json` file.
 
   ## API Documentation
 
