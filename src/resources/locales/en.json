@@ -41,7 +41,8 @@
     "upload": "Upload files"
   },
   "general": {
-    "upload-message": "Upload PDF File",
+    "upload-title": "Upload files",
+    "upload-message": "Upload PDF Files",
     "upload-success": "File uploaded successfully.",
     "select-file": "Select a file",
     "submit": "Submit",

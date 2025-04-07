@@ -41,7 +41,8 @@
     "upload": "Carregar arquivos"
   },
   "general": {
-  "upload-message": "Enviar Arquivo PDF",
+  "upload-title": "Carregar arquivos",
+  "upload-message": "Enviar Arquivos PDF",
   "upload-success": "Arquivo enviado com sucesso.",
   "select-file": "Selecionar um arquivo",
   "submit": "Enviar",
